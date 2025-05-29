@@ -58,10 +58,22 @@
   width: 100%;
 }
 
-.cursiva-lujo {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
-  color: #D4AF37;  /* dorado elegante */
-  text-shadow: none; /* sacamos sombra borrosa */
-  margin-top: -0.5rem;
+.logo-principal {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
 }
+.hero {
+  height: 100vh;
+  background: url('fondo.jpg') center/cover no-repeat;
+  padding: 2rem;
+  color: #1C1C1C;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6); /* para que el texto no se pierda */
+}
+
+.logo-principal {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
