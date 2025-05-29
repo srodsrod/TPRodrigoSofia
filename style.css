@@ -1,8 +1,52 @@
 .hero {
   height: 100vh;
-  background: url('banner-joyeria.jpg') center/cover no-repeat;
+  overflow: hidden;
+  position: relative;
   padding: 2rem;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+  color: #1C1C1C;
+}
+
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  padding: 2rem;
+  color: #1C1C1C;
+  text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+}
+
+.logo-principal {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.subtitulo-fino {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2rem;
+  color: #D4AF37;
+  letter-spacing: 1px;
+}
+
+#carouselHero {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-inner,
+.carousel-item,
+.carousel-item img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 2;
 }
 
 .navbar {
@@ -24,12 +68,11 @@
 }
 
 .navbar .btn:hover {
-  background-color: #E8D7B9;  /* champagne */
+  background-color: #E8D7B9;
   color: #1C1C1C;
   border-color: #E8D7B9;
 }
 
-/* Links simples (nav-link) */
 .navbar a,
 .navbar .nav-link {
   color: #1C1C1C;
@@ -39,10 +82,9 @@
 }
 
 .navbar .nav-link:hover {
-  color: #A0A28A; /* oliva sutil */
+  color: #A0A28A;
 }
 
-/* Línea dorada fina al hacer hover */
 .navbar .nav-link::after {
   content: '';
   position: absolute;
@@ -58,22 +100,30 @@
   width: 100%;
 }
 
-.logo-principal {
-  max-width: 300px;
-  height: auto;
-  margin-bottom: 1rem;
-}
-.hero {
-  height: 100vh;
-  background: url('fondo.jpg') center/cover no-repeat;
-  padding: 2rem;
+.btn-lindo {
+  background-color: #E8D7B9;
   color: #1C1C1C;
-  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6); /* para que el texto no se pierda */
+  border: 1px solid #E8D7B9;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
 }
 
-.logo-principal {
-  max-width: 300px;
-  height: auto;
-  margin-bottom: 1rem;
+.btn-lindo:hover {
+  background-color: #1C1C1C;
+  color: white;
+  border-color: #1C1C1C;
 }
 
+.btn-lindo-outline {
+  background-color: transparent;
+  color: #E8D7B9;
+  border: 1px solid #E8D7B9;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-lindo-outline:hover {
+  background-color: #1C1C1C;
+  color: white;
+  border-color: #1C1C1C;
+}
