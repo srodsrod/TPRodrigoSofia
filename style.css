@@ -4,3 +4,64 @@
   padding: 2rem;
   text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
 }
+
+.navbar {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .btn {
+  font-weight: 500;
+  border-width: 1px;
+  padding: 6px 12px;
+  color: #1C1C1C;
+  border-color: #1C1C1C;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar .btn:hover {
+  background-color: #E8D7B9;  /* champagne */
+  color: #1C1C1C;
+  border-color: #E8D7B9;
+}
+
+/* Links simples (nav-link) */
+.navbar a,
+.navbar .nav-link {
+  color: #1C1C1C;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar .nav-link:hover {
+  color: #A0A28A; /* oliva sutil */
+}
+
+/* Línea dorada fina al hacer hover */
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: #E8D7B9;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar .nav-link:hover::after {
+  width: 100%;
+}
+
+.cursiva-lujo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #D4AF37;  /* dorado elegante */
+  text-shadow: none; /* sacamos sombra borrosa */
+  margin-top: -0.5rem;
+}
