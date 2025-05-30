@@ -12,18 +12,29 @@
 <body>
 
   <!-- Header -->
-
-  <nav class="navbar navbar-expand-lg fixed-top px-4">
+ <nav class="navbar navbar-expand-lg fixed-top px-4">
     <a class="navbar-brand d-flex align-items-center" href="index.html">
   <img src="loguitoJE.png" alt="Logo" width="40" height="40" class="me-2">
+  Inicio
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <div class="d-flex gap-2">
-        <a href="catalogo.html" class="btn btn-excelsior">Ver catálogo</a>
-        <a href="formulario.html" class="btn btn-excelsior-outline">Agregar nueva joya</a>
+        <div class="dropdown">
+  <button class="btn btn-lindo dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Productos
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="catalogo.html">Todos</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=anillos">Anillos</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=collares">Collares</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=aros">Aros</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=pulseras">Pulseras</a></li>
+  </ul>
+</div>
+
         <a href="#" id="btnCarrito" class="btn btn-outline-dark">Carrito 🛒</a>
       </div>
     </div>
@@ -43,27 +54,14 @@
   <section class="container my-5">
     <h2 class="text-center mb-4">Nuestro Catálogo</h2>
     <div class="row justify-content-center gap-4" id="contenedorCatalogo">
-      
-      <!-- Cada tarjeta de joya -->
-      <div class="card col-md-3 p-0 shadow-sm">
-        <img src="joya1.jpg" class="card-img-top" alt="Joya 1">
-        <div class="card-body">
-          <h5 class="card-title">Collar Aurora</h5>
-          <p class="card-text">Tipo: Collar</p>
-          <p class="card-text fw-bold">$4.500</p>
-        </div>
-      </div>
-
-      <!-- Más tarjetas... (las podés cargar dinámicamente con JS) -->
-
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white text-center py-4 mt-5">
-    <p class="mb-1">© 2025 Joyería . Todos los derechos reservados.</p>
-    <small>Instagram · WhatsApp · Mail</small>
-  </footer>
+  <!-- Footer -->
+<footer class="bg-dark text-white text-center py-4 mt-3">
+  <p class="mb-1">© 2025 Joyería. Todos los derechos reservados.</p>
+  <small>Instagram · WhatsApp · Mail</small>
+</footer>
 
 </body>
 <script src="main.js"></script>

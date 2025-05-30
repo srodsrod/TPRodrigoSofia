@@ -127,3 +127,53 @@
   color: white;
   border-color: #1C1C1C;
 }
+
+.apple-style {
+  background-color: #FAF9F6; /* suave, elegante */
+  color: #1C1C1C;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease-out;
+}
+
+.apple-style.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.apple-style h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.apple-style p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+.testimonios {
+  background-color: #FFFFFF;
+  color: #1C1C1C;
+  margin-bottom: 100px; 
+}
+
+
+.testimonios h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.testimonios .card {
+  border: none;
+  background-color: #FAF9F6;
+  transition: all 0.6s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.testimonios .card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -12,17 +12,29 @@
 <body>
   <!-- Header -->
 
-  <nav class="navbar navbar-expand-lg fixed-top px-4">
+ <nav class="navbar navbar-expand-lg fixed-top px-4">
     <a class="navbar-brand d-flex align-items-center" href="index.html">
   <img src="loguitoJE.png" alt="Logo" width="40" height="40" class="me-2">
+  Inicio
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <div class="d-flex gap-2">
-        <a href="catalogo.html" class="btn btn-lindo">Ver catálogo</a>
-        <a href="formulario.html" class="btn btn-lindo-outline">Agregar nueva joya</a>
+        <div class="dropdown">
+  <button class="btn btn-lindo dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Productos
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="catalogo.html">Todos</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=anillos">Anillos</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=collares">Collares</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=aros">Aros</a></li>
+    <li><a class="dropdown-item" href="catalogo.html?categoria=pulseras">Pulseras</a></li>
+  </ul>
+</div>
+
         <a href="#" id="btnCarrito" class="btn btn-outline-dark">Carrito 🛒</a>
       </div>
     </div>
@@ -73,13 +85,53 @@
     <img src="logoJE.png" alt="Joyería Excelsior" class="logo-principal">
     <div class="d-flex gap-3 mt-4">
       <a href="catalogo.html" class="btn btn-lindo btn-lg">Ver catálogo</a>
-      <a href="formulario.html" class="btn btn-lindo btn-lg">Agregar nueva joya</a>
     </div>
   </div>
 </section>
 
+<section class="apple-style py-5">
+  <div class="container text-center">
+    <h2 class="display-5 mb-4">Nuestra esencia</h2>
+    <p class="lead mx-auto" style="max-width: 700px;">
+      En Excelsior diseñamos joyas que no solo se lucen, se sienten.  
+      Cada pieza es una declaración: de amor, de poder, de historia.  
+      Nuestro compromiso es con lo eterno, lo bello y lo que perdura.
+    </p>
+  </div>
+</section>
+
+<section class="testimonios py-5 mb-5">
+  <div class="container text-center">
+    <h2 class="mb-5">Historias que inspiran</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 shadow-sm fade-on-scroll">
+          <p class="mb-3 fst-italic">“Siempre tuve alergia a las joyas… hasta que conocí Excelsior. Hoy uso mis aros todos los días sin miedo.”</p>
+          <h6 class="fw-bold mb-0">Mariela G.</h6>
+          <small class="text-muted">Buenos Aires</small>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 shadow-sm fade-on-scroll">
+          <p class="mb-3 fst-italic">“No era de usar anillos, pero me enamoré del diseño y la calidad. Me hace sentir poderosa.”</p>
+          <h6 class="fw-bold mb-0">Camila T.</h6>
+          <small class="text-muted">Córdoba</small>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4 shadow-sm fade-on-scroll">
+            <p class="mb-3 fst-italic">“Buscaba un regalo especial. Cuando lo vio, lloró. Gracias por ayudarme a decir tanto con tan poco.”</p>
+          <h6 class="fw-bold mb-0">Luciana D.</h6>
+          <small class="text-muted">Rosario</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <!-- Footer -->
-<footer class="bg-dark text-white text-center py-4 mt-5">
+<footer class="bg-dark text-white text-center py-4 mt-3">
   <p class="mb-1">© 2025 Joyería. Todos los derechos reservados.</p>
   <small>Instagram · WhatsApp · Mail</small>
 </footer>
