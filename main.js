@@ -1,55 +1,4 @@
-  const btnCarrito = document.getElementById("btnCarrito");
-  const miniCarrito = document.getElementById("miniCarrito");
-
-  let carritoVisible = false;
-
-  btnCarrito.addEventListener("click", (e) => {
-    e.preventDefault(); // Para que no recargue la página si es <a>
-    carritoVisible = !carritoVisible;
-    miniCarrito.style.display = carritoVisible ? "block" : "none";
-  });
-
-  document.addEventListener("click", function (e) {
-    if (carritoVisible && !miniCarrito.contains(e.target) && e.target !== btnCarrito) {
-      miniCarrito.style.display = "none";
-      carritoVisible = false;
-    }
-  });
-
-  // Animación estilo Apple al hacer scroll
-const appleSection = document.querySelector('.apple-style');
-
-window.addEventListener('scroll', () => {
-  const sectionTop = appleSection.getBoundingClientRect().top;
-  const windowHeight = window.innerHeight;
-
-  if (sectionTop < windowHeight - 100) {
-    appleSection.classList.add('visible');
-  }
-});
-
-// Mostrar cards cuando aparecen en pantalla
-const fadeCards = document.querySelectorAll('.fade-on-scroll');
-
-function mostrarCardsScroll() {
-  fadeCards.forEach((card) => {
-    const cardTop = card.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (cardTop < windowHeight - 50) {
-      card.classList.add('visible');
-    }
-  });
-}
-
-window.addEventListener('scroll', mostrarCardsScroll);
-
-
-const contenedorCatalogo = document.getElementById("contenedorCatalogo");
-
-if (contenedorCatalogo) {
-  // Simulación de productos
-  const productos = [
+const productos = [
   { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "bellagio.jpg" },
   { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "cortina.jpg" },
   { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "lucca.jpg" },
@@ -65,32 +14,110 @@ if (contenedorCatalogo) {
   { nombre: "Pulsera Capri", tipo: "pulseras", precio: 6900, imagen: "capri.jpg" },
   { nombre: "Pulsera Como", tipo: "pulseras", precio: 7400, imagen: "como.jpg" },
   { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "saluzzo.jpg" },
-];
+];  
+const btnCarrito = document.getElementById("btnCarrito");
+const miniCarrito = document.getElementById("miniCarrito");
 
-  // Obtener categoría de la URL
+  let carritoVisible = false;
+
+  btnCarrito.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    carritoVisible = !carritoVisible;
+    miniCarrito.style.display = carritoVisible ? "block" : "none";
+  });
+
+  document.addEventListener("click", function (e) {
+    if (carritoVisible && !miniCarrito.contains(e.target) && e.target !== btnCarrito) {
+      miniCarrito.style.display = "none";
+      carritoVisible = false;
+    }
+  });
+
+
+function renderCatalogo() {
+  const contenedor = document.getElementById("contenedorCatalogo");
+  if (!contenedor) return;
+
   const params = new URLSearchParams(window.location.search);
-  const categoria = params.get("categoria"); // puede ser null
-
+  const categoria = params.get("categoria");
   const productosFiltrados = categoria
-    ? productos.filter((prod) => prod.tipo === categoria)
+    ? productos.filter((p) => p.tipo === categoria)
     : productos;
 
-  // Mostrar productos
-  contenedorCatalogo.innerHTML = "";
-
-  productosFiltrados.forEach((prod) => {
-    contenedorCatalogo.innerHTML += `
-      <div class="col-md-4 fade-on-scroll">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
-          <div class="card-body text-center">
-            <h5 class="card-title">${prod.nombre}</h5>
-            <p class="card-text text-muted mb-1">Tipo: ${prod.tipo}</p>
-            <p class="fw-bold mb-2">$${prod.precio}</p>
-            <button class="btn btn-lindo">Agregar al carrito</button>
-          </div>
+  contenedor.innerHTML = productosFiltrados.map((p) => `
+    <div class="col-md-4 fade-on-scroll">
+      <div class="card h-100 shadow-sm border-0">
+        <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
+        <div class="card-body text-center">
+          <h5 class="card-title">${p.nombre}</h5>
+          <p class="card-text text-muted mb-1">Tipo: ${p.tipo}</p>
+          <p class="fw-bold mb-2">$${p.precio}</p>
+          <button class="btn btn-lindo" onclick="agregarAlCarrito('${p.nombre}')">Agregar al carrito</button>
         </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+
+
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+function guardarCarrito() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  renderizarCarrito();
+}
+
+function agregarAlCarrito(nombre) {
+  const producto = productos.find((prod) => prod.nombre === nombre);
+  if (producto) {
+    carrito.push(producto);
+    guardarCarrito();
+  }
+}
+
+function eliminarDelCarrito(i) {
+  carrito.splice(i, 1);
+  guardarCarrito();
+}
+
+function vaciarCarrito() {
+  carrito = [];
+  guardarCarrito();
+}
+
+function renderizarCarrito() {
+  const contenedor = document.getElementById("carritoItems");
+  const total = document.getElementById("totalCarrito");
+  contenedor.innerHTML = "";
+
+  if (carrito.length === 0) {
+    contenedor.innerHTML = `<p class="text-muted">Tu carrito está vacío.</p>`;
+    total.textContent = "0";
+    return;
+  }
+
+  carrito.forEach((prod, i) => {
+    contenedor.innerHTML += `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <strong>${prod.nombre}</strong><br>
+          <small>$${prod.precio}</small>
+        </div>
+        <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito(${i})">❌</button>
       </div>
     `;
   });
+
+  const sumaTotal = carrito.reduce((acc, prod) => acc + prod.precio, 0);
+  total.textContent = sumaTotal;
 }
+
+renderizarCarrito();
+
+document.getElementById("vaciarCarrito")?.addEventListener("click", vaciarCarrito);
+
+document.getElementById("btnCarrito")?.addEventListener("click", () => {
+  const miniCarrito = document.getElementById("miniCarrito");
+  miniCarrito.style.display = "block";
+});
