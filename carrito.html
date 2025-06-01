@@ -43,13 +43,17 @@
 
   <!-- Mini carrito -->
 <div id="miniCarrito" class="position-fixed end-0 top-0 bg-light shadow p-3" style="width: 300px; height: 100vh; display: none; z-index: 1050;">
-  <h5 class="fw-bold mb-3">Tu carrito 🛒</h5>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0">Tu carrito 🛒</h5>
+    <button id="cerrarMiniCarrito" class="btn-close" aria-label="Cerrar"></button>
+  </div>
   <div id="carritoItems">
     <p class="text-muted">Tu carrito está vacío.</p>
   </div>
-    <hr>
+  <hr>
   <a href="carrito.html" class="btn btn-dark w-100">Ampliar carrito</a>
-  </div>
+</div>
+
 
   <!-- CARRITO COMPLETO -->
   <section class="container my-5">
