@@ -130,7 +130,6 @@ function renderizarCarritoPagina() {
 
   if (!contenedor || !total) return;
 
-  // ✅ Leemos del localStorage para tener la versión más actual
   const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
 
   contenedor.innerHTML = "";
@@ -142,8 +141,10 @@ function renderizarCarritoPagina() {
   }
 
   carritoLocal.forEach((prod, i) => {
+    const subtotal = prod.precio * prod.cantidad;
+
     contenedor.innerHTML += `
-      <div class="col-md-6">
+      <div class="col-md-6 mb-3">
         <div class="card h-100 shadow-sm border-0">
           <div class="row g-0 align-items-center">
             <div class="col-4">
@@ -152,8 +153,12 @@ function renderizarCarritoPagina() {
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title mb-1">${prod.nombre}</h5>
-                <p class="card-text mb-1">Cantidad: ${prod.cantidad}</p>
-                <p class="card-text fw-bold mb-2">$${prod.precio * prod.cantidad}</p>
+                <p class="mb-1">💲 <strong>Precio unitario:</strong> $${prod.precio}</p>
+                <div class="mb-2">
+                  <label for="cantidad-${i}" class="form-label mb-0"><strong>Cantidad:</strong></label>
+                  <input type="number" class="form-control form-control-sm" id="cantidad-${i}" min="1" value="${prod.cantidad}" onchange="actualizarCantidad(${i}, this.value)">
+                </div>
+                <p class="fw-bold mb-2">Subtotal: $${subtotal}</p>
                 <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito(${i}, 'pagina')">Eliminar</button>
               </div>
             </div>
@@ -166,6 +171,7 @@ function renderizarCarritoPagina() {
   const sumaTotal = carritoLocal.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
   total.textContent = sumaTotal;
 }
+
 
 
 
@@ -213,10 +219,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let carritoVisible = false;
 
     btnCarrito.addEventListener("click", (e) => {
-      e.preventDefault();
-      carritoVisible = !carritoVisible;
-      miniCarrito.style.display = carritoVisible ? "block" : "none";
-    });
+  e.preventDefault();
+  carritoVisible = !carritoVisible;
+  if (carritoVisible) {
+    mostrarMiniCarrito(); // 👈 siempre actualiza contenido al abrir
+    miniCarrito.style.display = "block";
+  } else {
+    miniCarrito.style.display = "none";
+  }
+});
+
 
     document.addEventListener("click", (e) => {
       if (carritoVisible && !miniCarrito.contains(e.target) && e.target !== btnCarrito) {
@@ -239,4 +251,35 @@ if (cerrarBtn && miniCarrito) {
   });
 }
 
+//const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
+//if (carritoGuardado.length > 0) {
+//  mostrarMiniCarrito();
+//}
+
+
 });
+
+function cerrarMiniCarrito() {
+  const miniCarrito = document.getElementById("miniCarrito");
+  if (miniCarrito) {
+    miniCarrito.style.display = "none";
+  }
+}
+
+function actualizarCantidad(index, nuevaCantidad) {
+  const cantidad = parseInt(nuevaCantidad);
+  if (isNaN(cantidad) || cantidad < 1) return;
+
+  const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
+  if (carritoLocal[index]) {
+    carritoLocal[index].cantidad = cantidad;
+    localStorage.setItem("carrito", JSON.stringify(carritoLocal));
+    renderizarCarritoPagina();
+
+    const carritoVisible = document.getElementById("miniCarrito")?.style.display === "block";
+    if (carritoVisible) {
+      mostrarMiniCarrito();
+    }
+  }
+}
+
