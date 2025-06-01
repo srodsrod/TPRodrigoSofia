@@ -121,3 +121,5 @@ document.getElementById("btnCarrito")?.addEventListener("click", () => {
   const miniCarrito = document.getElementById("miniCarrito");
   miniCarrito.style.display = "block";
 });
+
+renderCatalogo();
