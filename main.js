@@ -1,20 +1,21 @@
 const productos = [
-  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "https://placehold.co/300x300?text=Bellagio" },
-  { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "https://placehold.co/300x300?text=Cortina" },
-  { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "https://placehold.co/300x300?text=Lucca" },
-  
-  { nombre: "Collar Portofino", tipo: "collares", precio: 9800, imagen: "portofino.jpg" },
-  { nombre: "Collar Ravello", tipo: "collares", precio: 8600, imagen: "ravello.jpg" },
-  { nombre: "Collar Verona", tipo: "collares", precio: 10200, imagen: "verona.jpg" },
+  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "https://placehold.co/300x300?text=Bellagio", imagenHover: "https://placehold.co/300x300?text=Bellagio+Hover" },
+  { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "https://placehold.co/300x300?text=Cortina", imagenHover: "https://placehold.co/300x300?text=Cortina+Hover" },
+  { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "https://placehold.co/300x300?text=Lucca", imagenHover: "https://placehold.co/300x300?text=Lucca+Hover" },
 
-  { nombre: "Aros Siena", tipo: "aros", precio: 4300, imagen: "siena.jpg" },
-  { nombre: "Aros Taormina", tipo: "aros", precio: 4800, imagen: "taormina.jpg" },
-  { nombre: "Aros Ischia", tipo: "aros", precio: 5200, imagen: "ischia.jpg" },
+  { nombre: "Collar Portofino", tipo: "collares", precio: 9800, imagen: "portofino.jpg", imagenHover: "portofino-hover.jpg" },
+  { nombre: "Collar Ravello", tipo: "collares", precio: 8600, imagen: "ravello.jpg", imagenHover: "ravello-hover.jpg" },
+  { nombre: "Collar Verona", tipo: "collares", precio: 10200, imagen: "verona.jpg", imagenHover: "verona-hover.jpg" },
 
-  { nombre: "Pulsera Capri", tipo: "pulseras", precio: 6900, imagen: "capri.jpg" },
-  { nombre: "Pulsera Como", tipo: "pulseras", precio: 7400, imagen: "como.jpg" },
-  { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "saluzzo.jpg" },
+  { nombre: "Aros Siena", tipo: "aros", precio: 4300, imagen: "siena.jpg", imagenHover: "siena-hover.jpg" },
+  { nombre: "Aros Taormina", tipo: "aros", precio: 4800, imagen: "taormina.jpg", imagenHover: "taormina-hover.jpg" },
+  { nombre: "Aros Ischia", tipo: "aros", precio: 5200, imagen: "ischia.jpg", imagenHover: "ischia-hover.jpg" },
+
+  { nombre: "Pulsera Capri", tipo: "pulseras", precio: 6900, imagen: "capri.jpg", imagenHover: "capri-hover.jpg" },
+  { nombre: "Pulsera Como", tipo: "pulseras", precio: 7400, imagen: "como.jpg", imagenHover: "como-hover.jpg" },
+  { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "saluzzo.jpg", imagenHover: "saluzzo-hover.jpg" },
 ];
+
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -96,33 +97,33 @@ function eliminarDelCarrito(i, origen = "default") {
 
 
 function renderCatalogo() {
-  const contenedor = document.getElementById("contenedorCatalogo");
-  if (!contenedor) return;
+  const catalogoContainer = document.getElementById("catalogo");
+  if (!catalogoContainer) return;
 
-  const params = new URLSearchParams(window.location.search);
-  const categoria = params.get("categoria");
+  catalogoContainer.innerHTML = "";
 
-  const productosFiltrados = categoria
-    ? productos.filter((p) => p.tipo === categoria)
-    : productos;
-
-  contenedor.innerHTML = productosFiltrados.map((p) => `
-    <div class="col-md-4 fade-on-scroll">
-      <div class="card h-100 shadow-sm border-0">
-        <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
-        <div class="card-body text-center">
-          <h5 class="card-title">${p.nombre}</h5>
-          <p class="card-text text-muted mb-1">Tipo: ${p.tipo}</p>
-          <p class="fw-bold mb-2">$${p.precio}</p>
-          <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
-            <input type="number" min="1" value="1" class="form-control cantidad-input" id="cantidad-${p.nombre.replace(/\s+/g, '')}" style="width: 60px;">
-            <button class="btn btn-lindo" onclick="agregarAlCarrito('${p.nombre}')">Agregar</button>
+  productos.forEach((prod, index) => {
+    catalogoContainer.innerHTML += `
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="${prod.imagen}" 
+              class="card-img-top"
+              alt="${prod.nombre}"
+              onmouseover="this.src='${prod.imagenHover}'"
+              onmouseout="this.src='${prod.imagen}'">
+          <div class="card-body">
+            <h5 class="card-title">${prod.nombre}</h5>
+            <p class="card-text">$${prod.precio}</p>
+            <button class="btn btn-sm btn-outline-dark" onclick="agregarAlCarrito(${index})">
+              Agregar al carrito
+            </button>
           </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  });
 }
+
 
 function renderizarCarritoPagina() {
   const contenedor = document.getElementById("listaCarrito");
@@ -251,11 +252,6 @@ if (cerrarBtn && miniCarrito) {
   });
 }
 
-//const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
-//if (carritoGuardado.length > 0) {
-//  mostrarMiniCarrito();
-//}
-
 
 });
 
@@ -281,5 +277,16 @@ function actualizarCantidad(index, nuevaCantidad) {
       mostrarMiniCarrito();
     }
   }
+}
+
+function realizarCompra() {
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío, agrega cosas para poder comprar");
+    return;
+  }
+
+  alert("Compra realizada con éxito, gracias por comprar en Joyeria Excelsior");
+  vaciarCarrito(); 
+  window.location.href = "index.html";
 }
 
