@@ -1,5 +1,5 @@
 const productos = [
-  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "https://placehold.co/300x300?text=Bellagio", imagenHover: "https://placehold.co/300x300?text=Bellagio+Hover" },
+  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "Bellagio.jpg", imagenHover: "https://placehold.co/300x300?text=Bellagio+Hover" },
   { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "https://placehold.co/300x300?text=Cortina", imagenHover: "https://placehold.co/300x300?text=Cortina+Hover" },
   { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "https://placehold.co/300x300?text=Lucca", imagenHover: "https://placehold.co/300x300?text=Lucca+Hover" },
 
