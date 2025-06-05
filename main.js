@@ -1,23 +1,23 @@
 const productos = [
-  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "Bellagio.jpg", imagenHover: "https://placehold.co/300x300?text=Bellagio+Hover" },
-  { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "https://placehold.co/300x300?text=Cortina", imagenHover: "https://placehold.co/300x300?text=Cortina+Hover" },
-  { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "https://placehold.co/300x300?text=Lucca", imagenHover: "https://placehold.co/300x300?text=Lucca+Hover" },
+  { nombre: "Anillo Bellagio", tipo: "anillos", precio: 6500, imagen: "./IMG/bellagio.png", imagenHover: "./IMG/bellagio-hover.png" },
+  { nombre: "Anillo Cortina", tipo: "anillos", precio: 7200, imagen: "./IMG/cortina.png", imagenHover: "./IMG/cortina-hover.png" },
+  { nombre: "Anillo Lucca", tipo: "anillos", precio: 5800, imagen: "./IMG/lucca.png", imagenHover: "./IMG/lucca-hover.png" },
 
-  { nombre: "Collar Portofino", tipo: "collares", precio: 9800, imagen: "portofino.jpg", imagenHover: "portofino-hover.jpg" },
-  { nombre: "Collar Ravello", tipo: "collares", precio: 8600, imagen: "ravello.jpg", imagenHover: "ravello-hover.jpg" },
-  { nombre: "Collar Verona", tipo: "collares", precio: 10200, imagen: "verona.jpg", imagenHover: "verona-hover.jpg" },
+  { nombre: "Collar Portofino", tipo: "collares", precio: 9800, imagen: "./IMG/portofino.png", imagenHover: "./IMG/portofino-hover.png" },
+  { nombre: "Collar Ravello", tipo: "collares", precio: 8600, imagen: "./IMG/ravello.png", imagenHover: "./IMG/ravello-hover.png" },
+  { nombre: "Collar Verona", tipo: "collares", precio: 10200, imagen: "./IMG/verona.png", imagenHover: "./IMG/verona-hover.png" },
 
-  { nombre: "Aros Siena", tipo: "aros", precio: 4300, imagen: "siena.jpg", imagenHover: "siena-hover.jpg" },
-  { nombre: "Aros Taormina", tipo: "aros", precio: 4800, imagen: "taormina.jpg", imagenHover: "taormina-hover.jpg" },
-  { nombre: "Aros Ischia", tipo: "aros", precio: 5200, imagen: "ischia.jpg", imagenHover: "ischia-hover.jpg" },
+  { nombre: "Aros Siena", tipo: "aros", precio: 4300, imagen: "./IMG/siena.png", imagenHover: "./IMG/siena-hover.png" },
+  { nombre: "Aros Taormina", tipo: "aros", precio: 4800, imagen: "./IMG/taormina.png", imagenHover: "./IMG/taormina-hover.png" },
+  { nombre: "Aros Ischia", tipo: "aros", precio: 5200, imagen: "./IMG/ischia.png", imagenHover: "./IMG/ischia-hover.png" },
 
-  { nombre: "Pulsera Capri", tipo: "pulseras", precio: 6900, imagen: "capri.jpg", imagenHover: "capri-hover.jpg" },
-  { nombre: "Pulsera Como", tipo: "pulseras", precio: 7400, imagen: "como.jpg", imagenHover: "como-hover.jpg" },
-  { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "saluzzo.jpg", imagenHover: "saluzzo-hover.jpg" },
+  { nombre: "Pulsera Capri", tipo: "pulseras", precio: 6900, imagen: "./IMG/capri.png", imagenHover: "./IMG/capri-hover.png" },
+  { nombre: "Pulsera Como", tipo: "pulseras", precio: 7400, imagen: "./IMG/como.png", imagenHover: "./IMG/como-hover.png" },
+  { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "./IMG/saluzzo.png", imagenHover: "./IMG/saluzzo-hover.png" },
 ];
 
 
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []; //osea si no tiene nada el car. arma la lista peero vacia!!
 
 function renderizarCarrito() {
   const contenedor = document.getElementById("carritoItems");
@@ -102,7 +102,14 @@ function renderCatalogo() {
 
   catalogoContainer.innerHTML = "";
 
-  productos.forEach((prod, index) => {
+  const params = new URLSearchParams(window.location.search);
+  const categoriaSeleccionada = params.get("categoria");
+
+  const productosFiltrados = categoriaSeleccionada
+    ? productos.filter(prod => prod.tipo === categoriaSeleccionada)
+    : productos;
+
+  productosFiltrados.forEach((prod, index) => {
     catalogoContainer.innerHTML += `
       <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
@@ -114,7 +121,7 @@ function renderCatalogo() {
           <div class="card-body">
             <h5 class="card-title">${prod.nombre}</h5>
             <p class="card-text">$${prod.precio}</p>
-            <button class="btn btn-sm btn-outline-dark" onclick="agregarAlCarrito(${index})">
+            <button class="btn btn-sm btn-outline-dark" onclick="agregarAlCarrito('${prod.nombre}')">
               Agregar al carrito
             </button>
           </div>
