@@ -19,6 +19,18 @@ const productos = [
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; //osea si no tiene nada el car. arma la lista peero vacia!!
 
+function generarHTMLCarritoMini(lista) {
+  return lista.map((prod, i) => `
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div>
+        <strong>${prod.nombre}</strong><br>
+        <small>${prod.cantidad || 1} × $${prod.precio}</small>
+      </div>
+      <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito(${i}, 'sidebar')">❌</button>
+    </div>
+  `).join('');
+}
+
 function renderizarCarrito() {
   const contenedor = document.getElementById("carritoItems");
   const total = document.getElementById("totalCarrito");
@@ -32,17 +44,7 @@ function renderizarCarrito() {
     return;
   }
 
-  carrito.forEach((prod, i) => {
-    contenedor.innerHTML += `
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <div>
-          <strong>${prod.nombre}</strong><br>
-          <small>$${prod.precio}</small>
-        </div>
-        <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito(${i}, 'sidebar')">❌</button>
-      </div>
-    `;
-  });
+  contenedor.innerHTML = generarHTMLCarritoMini(carrito);
 
   const sumaTotal = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
   total.textContent = sumaTotal;
@@ -57,8 +59,6 @@ function guardarCarrito({ mostrarMini = false } = {}) {
     mostrarMiniCarrito();
   }
 }
-
-
 
 
 
@@ -77,10 +77,15 @@ function agregarAlCarrito(nombre, cantidad = 1) {
     carrito.push({ ...producto, cantidad: cantidadElegida });
   }
 
-  guardarCarrito({ mostrarMini: true }); // ✅ Solo desde acá mostramos el mini carrito
+  guardarCarrito({ mostrarMini: true }); 
   if (input) input.value = 1;
-}
 
+const toastElemento = document.getElementById("toastAgregado");
+if (toastElemento) {
+  const toast = new bootstrap.Toast(toastElemento);
+  toast.show();
+}
+}
 
 function vaciarCarrito() {
   carrito = [];
@@ -181,16 +186,12 @@ function renderizarCarritoPagina() {
 }
 
 
-
-
-
 function mostrarMiniCarrito() {
   const miniCarrito = document.getElementById("miniCarrito");
   const contenedor = document.getElementById("carritoItems");
 
   if (!miniCarrito || !contenedor) return;
 
-  // ✅ FORZAMOS la carga desde localStorage
   const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
 
   miniCarrito.style.display = "block";
@@ -200,18 +201,18 @@ function mostrarMiniCarrito() {
     return;
   }
 
-  contenedor.innerHTML = carritoLocal.map((prod, i) => `
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <div>
-        <strong>${prod.nombre}</strong><br>
-        <small>${prod.cantidad} × $${prod.precio}</small>
-      </div>
-      <button class="btn btn-sm btn-outline-danger" onclick="eliminarDelCarrito(${i}, 'sidebar')">❌</button>
+  const itemsHTML = generarHTMLCarritoMini(carritoLocal);
+
+  const total = carritoLocal.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+
+  contenedor.innerHTML = itemsHTML + `
+    <hr>
+    <div class="d-flex justify-content-between fw-bold">
+      <span>Total:</span>
+      <span>$${total}</span>
     </div>
-  `).join('');
+  `;
 }
-
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -271,20 +272,35 @@ function cerrarMiniCarrito() {
 
 function actualizarCantidad(index, nuevaCantidad) {
   const cantidad = parseInt(nuevaCantidad);
-  if (isNaN(cantidad) || cantidad < 1) return;
 
   const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
-  if (carritoLocal[index]) {
-    carritoLocal[index].cantidad = cantidad;
-    localStorage.setItem("carrito", JSON.stringify(carritoLocal));
-    renderizarCarritoPagina();
 
-    const carritoVisible = document.getElementById("miniCarrito")?.style.display === "block";
-    if (carritoVisible) {
-      mostrarMiniCarrito();
+  if (!carritoLocal[index]) return;
+
+  const cantidadAnterior = carritoLocal[index].cantidad;
+
+  if (isNaN(cantidad) || cantidad < 1) {
+    const input = document.getElementById(`cantidad-${index}`);
+    if (input) input.value = cantidadAnterior;
+
+    const toastError = document.getElementById("toastErrorCantidad");
+    if (toastError) {
+      const toast = new bootstrap.Toast(toastError);
+      toast.show();
     }
+    return;
+  }
+
+  carritoLocal[index].cantidad = cantidad;
+  localStorage.setItem("carrito", JSON.stringify(carritoLocal));
+  renderizarCarritoPagina();
+
+  const carritoVisible = document.getElementById("miniCarrito")?.style.display === "block";
+  if (carritoVisible) {
+    mostrarMiniCarrito();
   }
 }
+
 
 function realizarCompra() {
   if (carrito.length === 0) {
