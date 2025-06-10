@@ -1,9 +1,9 @@
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   position: relative;
-  padding: 2rem;
-  color: #1C1C1C;
+  padding: 0;
+  margin-bottom: 2rem;
 }
 
 .hero-content {
@@ -226,6 +226,27 @@
   }
 }
 
-.hero {
-  margin-bottom: 2rem;
+@media (max-width: 576px) {
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item img {
+    height: 60vh;
+  }
+
+  .hero {
+    min-height: auto;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+@media (max-width: 576px) {
+  .carousel-item img {
+    object-fit: contain;
+    object-position: top;
+  }
 }
