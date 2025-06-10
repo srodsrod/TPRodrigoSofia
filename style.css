@@ -249,9 +249,11 @@ body.carrito {
 
   .hero {
     min-height: auto;
+    padding-top: 70px;
     margin-bottom: 1.5rem;
   }
 }
+
 
 .carousel-item img {
   object-fit: cover;
