@@ -175,3 +175,57 @@
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
 }
+
+#miniCarrito {
+  overflow-y: auto;
+}
+
+@media (max-width: 576px) {
+  #miniCarrito {
+    width: 90vw !important;
+    padding: 1rem;
+    right: 0;
+    left: auto;
+    border-left: 1px solid #ccc;
+  }
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn {
+  min-width: 110px;
+}
+@media (max-width: 576px) {
+  footer p,
+  footer small {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item img {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .quienes-somos p {
+    font-size: 1rem;
+  }
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
