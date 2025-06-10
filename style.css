@@ -1,5 +1,6 @@
 .hero {
-  min-height: 100vh;
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
   overflow: hidden;
   position: relative;
   padding: 0;
@@ -62,13 +63,33 @@
   z-index: 2;
 }
 
-.navbar {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  transition: all 0.3s ease-in-out;
+/* Estilo default: fondo blanco sutil (para catálogo y carrito) */
+body.catalogo .navbar,
+body.carrito .navbar {
+  background-color: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  
 }
+
+/* Estilo flotante solo para el index */
+body.home .navbar {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.catalogo,
+body.carrito {
+  padding-top: 50px;
+}
+
+
+.navbar .navbar-brand img {
+  max-height: 38px;
+}
+
 
 .navbar .btn {
   font-weight: 500;
@@ -167,13 +188,6 @@
 
 .card-img-top {
   transition: all 0.3s ease-in-out;
-}
-
-.navbar {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  backdrop-filter: blur(6px);
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
 }
 
 #miniCarrito {
