@@ -13,48 +13,39 @@
 
 <body class="catalogo">
 
-
   <!-- Header -->
-<nav class="navbar navbar-expand-lg fixed-top px-4">
-    <a class="navbar-brand d-flex align-items-center" href="index.html">
-  <img src="./IMG/loguitoJE.png" alt="Logo" width="40" height="40" class="me-2">
-  Inicio
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <div class="d-flex gap-2">
-        <div class="dropdown">
-  <button class="btn btn-lindo dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Productos
+<nav class="navbar navbar-expand-lg fixed-top px-4 bg-white shadow-sm">
+  <a class="navbar-brand d-flex align-items-center" href="index.html">
+    <img src="./IMG/loguitoJE.png" alt="Logo" width="40" height="40" class="me-2"> Inicio
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="catalogo.html">Todos</a></li>
-    <li><a class="dropdown-item" href="catalogo.html?categoria=anillos">Anillos</a></li>
-    <li><a class="dropdown-item" href="catalogo.html?categoria=collares">Collares</a></li>
-    <li><a class="dropdown-item" href="catalogo.html?categoria=aros">Aros</a></li>
-    <li><a class="dropdown-item" href="catalogo.html?categoria=pulseras">Pulseras</a></li>
-  </ul>
-</div>
 
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav gap-2">
+      <li class="nav-item dropdown">
+        <button class="btn btn-lindo dropdown-toggle" data-bs-toggle="dropdown">
+          Productos
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="catalogo.html">Todos</a></li>
+          <li><a class="dropdown-item" href="catalogo.html?categoria=anillos">Anillos</a></li>
+          <li><a class="dropdown-item" href="catalogo.html?categoria=collares">Collares</a></li>
+          <li><a class="dropdown-item" href="catalogo.html?categoria=aros">Aros</a></li>
+          <li><a class="dropdown-item" href="catalogo.html?categoria=pulseras">Pulseras</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
         <a href="#" id="btnCarrito" class="btn btn-outline-dark">Carrito 🛒</a>
-      </div>
-    </div>
-  </nav>
-
-<!-- TOAST -->
-<div class="position-fixed top-50 start-50 translate-middle p-3" style="z-index: 1100">
-  <div id="toastAgregado" class="toast align-items-center text-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #E8D7B9;">
-    <div class="d-flex">
-      <div class="toast-body">
-        Producto agregado al carrito
-      </div>
-      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-    </div>
+      </li>
+    </ul>
   </div>
-</div>
+</nav>
 
+
+<main>
 <!-- TOAST DE ERROR -->
 <div class="position-fixed top-50 start-50 translate-middle p-3" style="z-index: 1100">
   <div id="toastErrorCantidad" class="toast align-items-center text-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #f8d7da;">
@@ -87,14 +78,18 @@
     <div class="row justify-content-center gap-4" id="catalogo">
     </div>
   </section>
+  
+</main>
 
   <!-- Footer -->
-<footer class="bg-dark text-white text-center py-4 mt-3">
-  <p class="mb-1">© 2025 Joyería. Todos los derechos reservados.</p>
-  <small>Instagram · WhatsApp · Mail</small>
+<footer class="bg-light text-center text-muted py-4 mt-5">
+  <div class="container">
+    <p class="mb-1">Joyería Excelsior · Creado por Sofía Rodrigo</p>
+    <small>Contacto: <a href="mailto:ayuda@excelsior.com">ayuda@excelsior.com</a></small>
+  </div>
 </footer>
-
-</body>
 <script src="main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

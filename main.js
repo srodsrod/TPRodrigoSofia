@@ -16,7 +16,6 @@ const productos = [
   { nombre: "Pulsera Saluzzo", tipo: "pulseras", precio: 6100, imagen: "./IMG/saluzzo.png", imagenHover: "./IMG/saluzzo-hover.png" },
 ];
 
-
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; //osea si no tiene nada el car. arma la lista peero vacia!!
 
 function generarHTMLCarritoMini(lista) {
@@ -80,11 +79,6 @@ function agregarAlCarrito(nombre, cantidad = 1) {
   guardarCarrito({ mostrarMini: true }); 
   if (input) input.value = 1;
 
-const toastElemento = document.getElementById("toastAgregado");
-if (toastElemento) {
-  const toast = new bootstrap.Toast(toastElemento);
-  toast.show();
-}
 }
 
 function vaciarCarrito() {
@@ -116,7 +110,7 @@ function renderCatalogo() {
 
   productosFiltrados.forEach((prod, index) => {
     catalogoContainer.innerHTML += `
-      <div class="col-12 col-sm-6 col-lg-3 mb-4">
+      <div class="col-12 col-md-5 col-lg-3 mb-4">
         <div class="card h-100 shadow-sm">
           <img src="${prod.imagen}" 
               class="card-img-top"
@@ -214,12 +208,10 @@ function mostrarMiniCarrito() {
   `;
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   renderizarCarrito();
   renderizarCarritoPagina();
   renderCatalogo();
-
 
   const btnCarrito = document.getElementById("btnCarrito");
   const miniCarrito = document.getElementById("miniCarrito");
@@ -237,7 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
     miniCarrito.style.display = "none";
   }
 });
-
 
     document.addEventListener("click", (e) => {
       if (carritoVisible && !miniCarrito.contains(e.target) && e.target !== btnCarrito) {
@@ -259,8 +250,6 @@ if (cerrarBtn && miniCarrito) {
     carritoVisible = false;
   });
 }
-
-
 });
 
 function cerrarMiniCarrito() {
@@ -301,7 +290,6 @@ function actualizarCantidad(index, nuevaCantidad) {
   }
 }
 
-
 function realizarCompra() {
   if (carrito.length === 0) {
     alert("Tu carrito está vacío, agrega cosas para poder comprar");
@@ -312,4 +300,3 @@ function realizarCompra() {
   vaciarCarrito(); 
   window.location.href = "index.html";
 }
-
